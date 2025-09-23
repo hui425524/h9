@@ -1,20 +1,103 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant-TW">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gacha Fun! | Neo-Retro + Playful</title>
+  <title>Gacha Go! </title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- 標題：幾何粗體  內文：圓潤 sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./test.css" />
+  <link rel="icon" href="./favicon.ico">
 </head>
+
+<!-- <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const dataSets = [
+    [
+      { title:'Retro Mix',     desc:'像素貼紙 & 懷舊電玩徽章' },
+      { title:'Kawaii World',  desc:'超可愛角色 & Pastel 配色' },
+      { title:'Mystery Box',   desc:'每一顆都是驚喜！' },
+      { title:'Limited Edition', desc:'這批賣完就不會回來' }
+    ],
+    [
+      { title:'Neo Future',    desc:'霓虹與像素的未來混搭' },
+      { title:'Cyber Pop',     desc:'高飽和賽博流行' },
+      { title:'Pixel Party',   desc:'像素主題派對特別款' },
+      { title:'Dream Land',    desc:'柔霧粉彩的夢境系列' }
+    ]
+    // 需要更多組就繼續加
+  ];
+
+  const grid    = document.getElementById('capsuleGrid');
+  const btnPrev = document.getElementById('prevSet');
+  const btnNext = document.getElementById('nextSet');
+  if (!grid) return console.error('Missing #capsuleGrid');
+
+  let page = 0, busy = false;
+
+  function renderCards(list){
+    grid.innerHTML = list.map(d => `
+      <article class="capsule-card">
+        <h3>${d.title}</h3>
+        <p class="desc">${d.desc}</p>
+        <div class="tags"><span>推薦</span><span>上新</span></div>
+        <a href="#spin" class="pill">去抽抽</a>
+      </article>
+    `).join('');
+  }
+
+  renderCards(dataSets[page]);
+
+  function slideTo(dir){
+    if (busy) return;
+    busy = true; btnPrev.disabled = btnNext.disabled = true;
+
+    const exitClass = dir === 'next' ? 'anim-exit-left' : 'anim-exit-right';
+    grid.classList.add(exitClass);
+
+    grid.addEventListener('transitionend', function onExit(){
+      grid.removeEventListener('transitionend', onExit);
+
+      page = (dir === 'next')
+        ? (page + 1) % dataSets.length
+        : (page - 1 + dataSets.length) % dataSets.length;
+
+      renderCards(dataSets[page]);
+
+      const enterClass = dir === 'next' ? 'anim-enter-right' : 'anim-enter-left';
+      grid.className = 'capsule-grid';        // 清理舊 class
+      grid.id = 'capsuleGrid';
+      grid.classList.add(enterClass);
+
+      requestAnimationFrame(() => {
+        grid.classList.add('anim-enter-active');
+      });
+
+      grid.addEventListener('transitionend', function onEnter(){
+        grid.removeEventListener('transitionend', onEnter);
+        grid.className = 'capsule-grid';
+        grid.id = 'capsuleGrid';
+        busy = false; btnPrev.disabled = btnNext.disabled = false;
+      }, {once:true});
+    }, {once:true});
+  }
+
+  btnNext?.addEventListener('click', () => slideTo('next'));
+  btnPrev?.addEventListener('click', () => slideTo('prev'));
+});
+</script> -->
+
+
 <body>
   <!-- 站內頂部導覽 -->
   <header class="topbar">
     <div class="container nav">
-      <a class="brand" href="#">Gacha<span>Fun!</span></a>
+      <a class="brand" href="./index.html">Gacha Go!</a>
       <nav class="menu">
         <a href="#spin">線上扭蛋</a>
         <a href="#collections">圖鑑</a>
@@ -27,39 +110,66 @@
   <!-- 背景：粉彩格紋 + 漂浮 icon -->
   <div class="bg-grid"></div>
   <ul class="float-icons" aria-hidden="true">
-    <li>★</li><li>☺︎</li><li>♥</li><li>✦</li><li>⚡</li>
+    <li>★</li>
+    <li>☺︎</li>
+    <li>♥</li>
+    <li>✦</li>
+    <li>⚡</li>
   </ul>
 
   <!-- Hero：主視覺 -->
   <section class="hero" id="home">
     <div class="container hero-inner">
-      <p class="badge">NEW • 每週上新</p>
+      <p class="sec_title">NEW • 每週上新</p>
       <h1>Spin Your World!</h1>
       <p class="sub">線上抽膠囊、收集限量角色，打造你的復古可愛宇宙。</p>
-      <div class="cta-group">
+      <div class="btntop-group">
         <a class="btn btn-primary" href="#spin">Start Your Spin</a>
         <a class="btn btn-ghost" href="#collections">查看圖鑑</a>
       </div>
 
+      <!-- 扭蛋spin按鈕-->
+
+
+
       <!-- 小型扭蛋機裝置：裝飾 + 入口 -->
       <div class="mini-gachapon" role="img" aria-label="扭蛋機造型裝飾">
+        <!-- 新增：隱藏 checkbox 作為開/闔狀態 -->
+        <input type="checkbox" id="miniSpin" hidden>
         <div class="cap top"></div>
         <div class="cap bottom"></div>
-        <button class="spin-knob" onclick="scrollToSpin()">Spin</button>
+        <!-- <button class="spin-btn" onclick="scrollToSpin()">Spin</button> -->
+
+        <!-- 新增：點擊「整顆膠囊」也能切換（可選）-->
+        <label for="miniSpin" class="capsule-hit" aria-label="點我打開/關閉"></label>
+
+        <!-- 將按鈕改成 label 來切換 -->
+        <label for="miniSpin" class="spin-btn">Spin</label>
+
+        <!-- 爆裂用的小圖案（純裝飾） -->
+        <ul class="burst" aria-hidden="true">
+          <li>★</li>
+          <li>♡</li>
+          <li>☺︎</li>
+          <li>✦</li>
+          <li>⚡</li>
+          <li>♪</li>
+        </ul>
       </div>
+
     </div>
   </section>
 
   <!-- 推薦膠囊：卡片 4 欄（RWD 自適應） -->
   <section class="section" id="featured">
     <div class="container">
-      <h2 class="section-title">本週推薦膠囊</h2>
+      <h2 class="section-title">本月新扭蛋</h2>
       <div class="capsule-grid">
         <!-- 卡片樣式：Neo-Retro 邊框、投影、圓角 -->
         <article class="capsule-card">
           <h3>Retro Mix</h3>
           <p class="desc">像素貼紙 &amp; 懷舊電玩徽章</p>
-          <div class="tags"><span>經典</span><span>多人最愛</span></div>
+          <div class="tags"><span>經典</span><span>童年回憶</span></div>
           <a href="#spin" class="pill">去抽抽</a>
         </article>
 
@@ -73,7 +183,7 @@
         <article class="capsule-card alt2">
           <h3>Mystery Box</h3>
           <p class="desc">每一顆都是驚喜！</p>
-          <div class="tags"><span>隱藏款</span><span>高刺激</span></div>
+          <div class="tags"><span>隱藏款</span><span>新上架</span></div>
           <a href="#spin" class="pill">去抽抽</a>
         </article>
 
@@ -84,6 +194,10 @@
           <a href="#spin" class="pill">去抽抽</a>
         </article>
       </div>
+    </div>
+    <div class="grid-controls">
+      <button type="button" id="prevSet" aria-label="上一組">‹ 上一組</button>
+      <button type="button" id="nextSet" aria-label="下一組">下一組 ›</button>
     </div>
   </section>
 
@@ -160,14 +274,17 @@
       <h2 class="section-title">關於我們</h2>
       <p>我們把 90’s 街機靈感、可愛像素與膠囊玩具文化合而為一，做出線上也能「轉一轉、集一集」的 Neo-Retro 遊樂場。</p>
       <ul class="chips">
-        <li>Neo-Retro</li><li>Playful</li><li>Pastel</li><li>Pixel</li>
+        <li>Neo-Retro</li>
+        <li>Playful</li>
+        <li>Pastel</li>
+        <li>Pixel</li>
       </ul>
     </div>
   </section>
 
   <footer class="footer">
     <div class="container">
-      <small>© 2025 Gacha Fun! All rights reserved.</small>
+      <small>© 2025 Gacha GO! All rights reserved.</small>
       <nav class="foot-links">
         <a href="#">條款</a><a href="#">隱私</a><a href="#">聯絡</a>
       </nav>
@@ -175,5 +292,9 @@
   </footer>
 
   <script src="app.js"></script>
+
+
+
 </body>
+
 </html>
