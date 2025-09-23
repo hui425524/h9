@@ -1,0 +1,200 @@
+:root{
+  --bg:#111115;
+  --ink:#1b1b1f;
+  --paper:#fff8fe;
+  --grid:#eac8ff;
+  --neoPink:#ff7ecf;
+  --neoBlue:#7ecbff;
+  --neoMint:#8df2d1;
+  --neoLemon:#ffe074;
+  --neoLav:#caa7ff;
+  --shadow:0 6px 0 #1e1e1e40, 0 18px 36px #00000025;
+  --radius:18px;
+  --container: min(1120px, 92vw);
+}
+
+/* reset (簡版) */
+*{box-sizing:border-box} html,body{height:100%}
+body{
+  margin:0; color:#2a2a2a; background:var(--bg);
+  font-family:"Plus Jakarta Sans", system-ui, -apple-system, "Noto Sans TC", sans-serif;
+  line-height:1.6; overflow-x:hidden;
+}
+
+/* 粉彩格紋背景 */
+.bg-grid{
+  position:fixed; inset:0; z-index:-2;
+  background:
+    linear-gradient(90deg, transparent 31px, var(--grid) 32px, transparent 33px) 0 0/64px 64px,
+    linear-gradient(0deg,  transparent 31px, var(--grid) 32px, transparent 33px) 0 0/64px 64px,
+    linear-gradient(180deg, #ffe6f8, #eaf3ff 45%, #eefcf3);
+  opacity:.75;
+  filter: saturate(1.1);
+}
+
+/* 漂浮 icon */
+.float-icons{position:fixed; inset:0; pointer-events:none; z-index:-1; list-style:none; margin:0; padding:0}
+.float-icons li{
+  position:absolute; font-family:"Fredoka", sans-serif; font-weight:700;
+  font-size:48px; color:#ffffffa8; animation:float 12s linear infinite;
+}
+.float-icons li:nth-child(1){left:6vw; top:18vh}
+.float-icons li:nth-child(2){right:10vw; top:26vh; animation-duration:10s}
+.float-icons li:nth-child(3){left:22vw; bottom:22vh; animation-duration:14s}
+.float-icons li:nth-child(4){right:24vw; bottom:18vh; animation-duration:16s}
+.float-icons li:nth-child(5){left:48vw; top:40vh; animation-duration:18s}
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+
+.container{width:var(--container); margin-inline:auto}
+
+/* Topbar */
+.topbar{position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(6px)}
+.topbar::before{
+  content:""; display:block; height:72px;
+  background:linear-gradient(180deg, #fff9 0, #fff6 100%);
+  border-bottom:2px solid #00000010;
+}
+.topbar .nav{margin-top:-56px; height:56px; display:flex; align-items:center; justify-content:space-between}
+.brand{
+  font-family:"Fredoka"; font-weight:700; text-decoration:none; color:#222; font-size:24px;
+  background:linear-gradient(90deg, var(--neoPink), var(--neoBlue));
+  -webkit-background-clip:text; background-clip:text; color:transparent
+}
+.brand span{filter:drop-shadow(0 1px 0 #fff)}
+.menu a{
+  color:#333; text-decoration:none; font-weight:600; margin-left:20px; padding:8px 12px; border-radius:999px;
+}
+.menu a:hover{background:#ffffff; box-shadow:var(--shadow)}
+
+/* Hero */
+.hero{padding:108px 0 72px}
+.hero-inner{display:grid; gap:18px; place-items:center; text-align:center}
+.badge{
+  background:#fff; border:2px solid #00000012; padding:6px 12px; border-radius:999px;
+  font-weight:700; letter-spacing:.08em; color:#333; box-shadow:var(--shadow)
+}
+h1{
+  font-family:"Fredoka"; font-weight:700; font-size:clamp(36px, 5.2vw, 64px);
+  margin:6px 0 0; color:#222
+}
+.sub{color:#4b4b4b; max-width:720px}
+.cta-group{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:4px}
+.btn{border-radius:999px; padding:14px 22px; text-decoration:none; display:inline-block; font-weight:700; box-shadow:var(--shadow)}
+.btn-primary{background:linear-gradient(180deg, var(--neoPink), var(--neoLav)); color:#fff}
+.btn-ghost{background:#fff; color:#333; border:2px solid #00000010}
+.btn:active{transform:translateY(1px)}
+
+/* Mini 扭蛋機（裝飾） */
+.mini-gachapon{margin-top:18px; position:relative; width:180px; height:210px}
+.mini-gachapon .cap{width:100%; height:80px; border-radius:80px 80px 16px 16px / 80px 80px 16px 16px; background:#cfe9ff; border:6px solid #fff; box-shadow:var(--shadow)}
+.mini-gachapon .bottom{margin-top:8px; background:#c8ffef}
+.spin-knob{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:-12px;
+  border:none; border-radius:999px; padding:10px 18px; font-weight:800; cursor:pointer;
+  color:#333; background:linear-gradient(180deg, #fff, var(--neoLemon)); box-shadow:var(--shadow)
+}
+
+/* 區塊通用 */
+.section{padding:72px 0; background:#fff}
+.section:nth-of-type(even){background:#fcf8ff}
+.section-title{
+  font-family:"Fredoka"; font-weight:700; font-size:clamp(24px, 3vw, 36px); color:#222; text-align:center; margin:0 0 24px
+}
+.hint{font-size:13px; color:#6f6f6f; text-align:center}
+
+/* 推薦卡片 */
+.capsule-grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:16px}
+@media (max-width:1024px){.capsule-grid{grid-template-columns:repeat(2, 1fr)}}
+@media (max-width:560px){.capsule-grid{grid-template-columns:1fr}}
+.capsule-card{
+  background:#fff; border:3px solid #00000012; border-radius:var(--radius);
+  padding:18px; box-shadow:var(--shadow); position:relative; overflow:hidden
+}
+.capsule-card::after{
+  content:""; position:absolute; inset:auto -30% -30% auto; width:160px; height:160px; border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #fff, #ffd7f4 60%, transparent 61%);
+  opacity:.6; transform:rotate(12deg)
+}
+.capsule-card h3{margin:0 0 6px; font-family:"Fredoka"; font-size:22px}
+.capsule-card .desc{margin:0 0 12px; color:#666}
+.capsule-card .tags{display:flex; gap:8px; flex-wrap:wrap}
+.capsule-card .tags span{
+  font-size:12px; background:#f7f7f7; border:2px solid #00000010; border-radius:999px; padding:4px 8px
+}
+.capsule-card .pill{position:absolute; right:12px; bottom:12px; text-decoration:none; font-weight:800; color:#333;
+  background:linear-gradient(180deg, var(--neoMint), #cdfddf); padding:8px 12px; border-radius:999px; box-shadow:var(--shadow)}
+.capsule-card.alt1{background:linear-gradient(180deg, #fff, #f2e8ff)}
+.capsule-card.alt2{background:linear-gradient(180deg, #fff, #e9f7ff)}
+.capsule-card.alt3{background:linear-gradient(180deg, #fff, #fff5de)}
+
+/* 線上扭蛋區 */
+.section-iris{background:linear-gradient(180deg, #fff, #f3e9ff 30%, #e9fff6)}
+.spin-panel{display:grid; grid-template-columns:1.1fr .9fr; gap:20px; align-items:center}
+@media (max-width:900px){.spin-panel{grid-template-columns:1fr}}
+.machine{
+  background:#ffffff; border:3px solid #00000012; border-radius:24px; padding:24px;
+  min-height:260px; display:grid; place-items:center; position:relative; box-shadow:var(--shadow)
+}
+.bubble, .b2, .b3{
+  position:absolute; top:18px; left:24px; width:44px; height:44px; border-radius:999px; background:linear-gradient(180deg, #fff, #ffd9f4); border:3px solid #fff; box-shadow:var(--shadow)
+}
+.b2{left:auto; right:24px; background:linear-gradient(180deg, #fff, #dffcff)}
+.b3{top:auto; bottom:18px; left:50%; transform:translateX(-50%); background:linear-gradient(180deg, #fff, #e7ffe6)}
+.spin-btn{
+  border:none; border-radius:16px; padding:16px 22px; font-weight:900; cursor:pointer;
+  color:#2a2a2a; background:linear-gradient(180deg, var(--neoLemon), #ffd54b); box-shadow:var(--shadow)
+}
+.result{display:grid; gap:12px}
+.ticket{
+  background:#fff; border:3px dashed #0000002a; border-radius:16px; padding:18px; box-shadow:var(--shadow)
+}
+.ticket .label{font-size:12px; color:#6a6a6a; margin:0 0 4px}
+.ticket .item{font-family:"Fredoka"; font-size:22px; margin:0}
+
+/* 圖鑑 */
+.dex{display:grid; grid-template-columns:repeat(6,1fr); gap:10px}
+@media (max-width:920px){.dex{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:520px){.dex{grid-template-columns:repeat(2,1fr)}}
+.dex-card{
+  border-radius:16px; padding:14px; text-align:center; background:#f3f3f3; color:#999; box-shadow:var(--shadow)
+}
+.dex-card span{display:block; font-size:12px; opacity:.75}
+.dex-card strong{display:block; font-family:"Fredoka"; margin-top:2px}
+.dex-card.got{background:linear-gradient(180deg, #fff, #eaf3ff)}
+.dex-card.got strong{color:#333}
+.section-lemon{background:linear-gradient(180deg, #fff, #fff6d9)}
+
+/* 評論牆泡泡卡 */
+.wall{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+@media (max-width:920px){.wall{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.wall{grid-template-columns:1fr}}
+.bubble-card{
+  background:#fff; border:3px solid #00000012; border-radius:22px; padding:16px 18px; box-shadow:var(--shadow);
+  position:relative
+}
+.bubble-card::after{
+  content:""; position:absolute; left:24px; bottom:-10px; width:20px; height:20px; background:#fff;
+  border-left:3px solid #00000012; border-bottom:3px solid #00000012; transform:rotate(45deg)
+}
+.bubble-card figcaption{font-weight:700}
+.bubble-card p{margin:.2em 0 0}
+.bubble-card.alt{background:linear-gradient(180deg, #fff, #f2e8ff)}
+
+/* 關於 + 小籤 */
+.about p{max-width:720px; margin-inline:auto; text-align:center}
+.chips{display:flex; gap:8px; justify-content:center; list-style:none; padding:0; margin:14px 0 0}
+.chips li{background:#fff; border:2px solid #00000010; border-radius:999px; padding:6px 10px; font-weight:700}
+
+/* Footer */
+.footer{background:#17171b; color:#cfcfe6; padding:24px 0}
+.footer .container{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.footer a{color:#cfcfe6; text-decoration:none; opacity:.9; margin-left:12px}
+.footer a:hover{opacity:1}
+
+/* 連結列 */
+.links-inline{display:flex; gap:16px; justify-content:center; margin-top:12px}
+.links-inline a{color:#333; font-weight:700}
