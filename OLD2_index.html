@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gacha Go — 線上扭蛋</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Chakra+Petch:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./favicon.ico"><style>
+/* ========= CSS 變數：Neo-Retro + Playful ========= */
+:root{
+  --bg: #FFF7FB;
+  --ink: #2b2b2b;
+  --sub: #6b6b6b;
+
+  --pink: #FAD4E8;
+  --lav:  #C7CEEA;
+  --mint: #B5EAD7;
+  --lemon:#FFF5BA;
+  --peach:#FFD6C9;
+  --blue: #91A7DE;
+
+  --accent:#ff7ac1;
+  --accent-ink:#35273a;
+
+  --radius: 18px;
+  --shadow: 0 10px 24px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);
+  --grid-color: rgba(62, 31, 77,.08);
+  --container: clamp(960px, 88vw, 1200px);
+}
+
+/* ========= 全域基礎 ========= */
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background: var(--bg);
+  font-family: "Fredoka", system-ui, -apple-system, "PingFang TC", "Microsoft JhengHei", Arial, sans-serif;
+  line-height:1.6;
+}
+
+/* 輔助：跳轉主內容（無障礙） */
+.skip-link{
+  position:absolute; left:-9999px; top:auto;
+}
+.skip-link:focus{
+  left:1rem; top:1rem; z-index:9999;
+  background:#fff; padding:.5rem .75rem; border-radius:.5rem;
+  box-shadow: var(--shadow);
+}
+
+/* ========= 導覽 ========= */
+.header{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,.75);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+.nav{
+  max-width:var(--container);
+  margin-inline:auto;
+  padding:.6rem 1rem;
+  display:flex; align-items:center; gap:1rem;
+}
+.brand{
+  display:flex; align-items:center; gap:.6rem;
+  font-family:"Chakra Petch", monospace;
+  font-weight:700; letter-spacing:.5px;
+}
+.brand-badge{
+  width:36px; height:36px; border-radius:10px;
+  background: conic-gradient(from 180deg at 50% 50%, var(--pink), var(--lav), var(--mint), var(--lemon), var(--pink));
+  box-shadow: inset 0 0 0 3px #fff, var(--shadow);
+}
+.nav ul{margin-left:auto; display:flex; gap:.6rem; list-style:none; padding:0}
+.nav a{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.55rem .8rem; border-radius:999px; text-decoration:none;
+  color:#333; font-weight:600; font-size:.95rem;
+  background:#fff; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.06);
+}
+.nav a:hover{ transform: translateY(-1px); }
+
+/* ========= Hero（格紋背景） ========= */
+.section{
+  padding: clamp(56px, 10vw, 96px) 0;
+}
+.hero{
+  position:relative; overflow:hidden;
+  background:
+    linear-gradient(#fff0, #fff0),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(0deg,  var(--grid-color) 1px, transparent 1px);
+  background-size: 100% 100%, 36px 36px, 36px 36px;
+  background-position: 0 0, 0 0, 0 0;
+}
+.hero::before, .hero::after{
+  content:""; position:absolute; inset:auto auto -120px -80px;
+  width:260px; height:260px; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--pink) 60%);
+  opacity:.7; filter: blur(2px);
+}
+.hero::after{
+  inset:auto -80px -160px auto; width:320px; height:320px;
+  background: radial-gradient(circle at 70% 30%, #fff, var(--lav) 60%);
+}
+@media (max-width: 640px) {
+  .hero::before,
+  .hero::after {
+    display: none;
+    content: none; /* 保險一點，避免殘留 */
+  }
+}
+.hero-inner{
+  max-width:var(--container); margin-inline:auto; padding:0 1rem;
+  display:grid; grid-template-columns: 1.2fr 1fr; gap:min(6vw, 48px);
+}
+h1{
+  font-size: clamp(2rem, 4.8vw, 3.6rem);
+  line-height:1.1; margin: 0 0 .6rem 0;
+  letter-spacing:.5px;
+}
+.hero p{ color:var(--sub); margin: 0 0 1.2rem 0; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:.9rem 1.2rem; border-radius:14px;
+  font-weight:700; text-decoration:none; border:2px solid var(--accent-ink);
+  box-shadow: 0 4px 0 var(--accent-ink), var(--shadow);
+  background: linear-gradient(180deg, #ffe2f1, var(--accent));
+  color:#2a1732;
+  transition: transform .06s ease;
+}
+.btn:hover{ transform: translateY(-2px); }
+.btn:active{ transform: translateY(1px); box-shadow: 0 2px 0 var(--accent-ink); }
+
+/* ========= 扭蛋機（示意造型） ========= */
+.gacha{
+  display:grid; place-items:center;
+}
+.machine{
+  width:min(340px, 80%); aspect-ratio: 1/1.2; margin:auto; position:relative;
+  border-radius: 22px; padding:16px;
+  background: linear-gradient(180deg, #fff, var(--mint));
+  box-shadow: var(--shadow), inset 0 -8px 20px rgba(0,0,0,.05);
+  border: 3px solid #2f2a4a;
+}
+.machine-top{
+  height:45%; border-radius:18px 18px 10px 10px; background:var(--lav);
+  display:grid; place-items:center; color:#2b2550; font-weight:700;
+}
+.machine-window{
+  position:absolute; left:10%; right:10%; top:30%; height:26%;
+  background:#ffffffc7; border:2px dashed #7c71c5; border-radius:12px;
+  display:grid; place-items:center; text-align:center; padding:.5rem;
+  font-weight:600; color:#6a5fb2;
+}
+.machine-bottom{
+  position:absolute; left:8%; right:8%; bottom:16%;
+  height:18%; border-radius:12px; background:var(--peach);
+  box-shadow: inset 0 -8px 16px rgba(0,0,0,.08);
+}
+.machine-slot{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:6%;
+  width:46%; height:12%; border-radius: 12px; background:#2b2b2b; box-shadow: inset 0 4px 10px rgba(0,0,0,.4);
+}
+
+/* ========= 通用容器 & 標題 ========= */
+.container{ max-width:var(--container); margin-inline:auto; padding:0 1rem; }
+.section-title{
+  font-size: clamp(1.4rem, 3.4vw, 2.2rem);
+  margin: 0 0 1rem 0;
+}
+
+/* ========= 卡片格 ========= */
+.grid{
+  display:grid; gap:16px;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 1024px){ .grid{ grid-template-columns: repeat(3, 1fr);} }
+@media (max-width: 720px){ .grid{ grid-template-columns: repeat(2, 1fr);} }
+
+.card{
+  background:#fff; border-radius: var(--radius);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow: var(--shadow); padding:16px;
+  position:relative; overflow:hidden;
+}
+.card.badge::after{
+  content:"NEW"; position:absolute; top:10px; right:-18px;
+  transform:rotate(15deg);
+  background: var(--lemon); color:#5b4a00; font-weight:800;
+  padding:.3rem .8rem; border-radius:999px; border:2px solid #5b4a00;
+}
+
+/* ========= 膠囊標籤 ========= */
+.tag{
+  display:inline-flex; align-items:center; gap:.4rem;
+  padding:.35rem .6rem; border-radius:999px; font-size:.85rem; font-weight:700;
+  border:2px solid #2a213e; background:#fff; box-shadow: 0 2px 0 #2a213e;
+}
+
+/* ========= 章節色帶 ========= */
+.ribbon{
+  background: linear-gradient(90deg, var(--pink), var(--lav), var(--mint), var(--lemon));
+  -webkit-background-clip: text; color: transparent;
+}
+
+/* ========= 收藏（已得/未得） ========= */
+.collect{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(6, 1fr);
+}
+@media (max-width: 960px){ .collect{ grid-template-columns: repeat(4, 1fr);} }
+@media (max-width: 640px){ .collect{ grid-template-columns: repeat(3, 1fr);} }
+.tile{
+  aspect-ratio: 1 / 1; border-radius:14px; overflow:hidden;
+  display:grid; place-items:center; text-align:center;
+  border:1px solid rgba(0,0,0,.08); box-shadow: var(--shadow);
+  background:#fff;
+  font-weight:700;
+}
+.tile.lock{ filter: grayscale(1) contrast(.8) opacity(.65); }
+
+/* ========= 評論 ========= */
+.reviews{
+  display:grid; gap:16px;
+  grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 880px){ .reviews{ grid-template-columns: repeat(2, 1fr);} }
+@media (max-width: 620px){ .reviews{ grid-template-columns: 1fr;} }
+
+.review{
+  background:#fff; border-radius: var(--radius);
+  border:1px solid rgba(0,0,0,.08); box-shadow: var(--shadow);
+  padding:16px; display:grid; gap:8px;
+}
+.stars{ color:#ffb703; letter-spacing:1px; }
+
+/* ========= Footer ========= */
+.footer{
+  background: radial-gradient(circle at 10% 0%, var(--pink), transparent 40%),
+              radial-gradient(circle at 90% 100%, var(--mint), transparent 40%),
+              #f9f6ff;
+  border-top:1px solid rgba(0,0,0,.08);
+  padding:40px 0;
+}
+.footer .cols{ display:grid; gap:18px; grid-template-columns: 2fr 1fr 1fr; }
+.footer a{ color:#333; font-weight:600; text-decoration:none; }
+
+/* ========= 小裝飾（分隔） ========= */
+.hr-dots{
+  --c: #bda8ff;
+  width:100%; height:10px; background:
+    radial-gradient(circle, var(--c) 2px, transparent 3px) 0 50%/20px 10px repeat-x;
+  opacity:.6; margin: 24px 0;
+}
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">跳到主內容</a>
+
+<!-- ============ Header / Nav ============ -->
+<header class="header">
+  <nav class="nav">
+    <div class="brand" aria-label="Gacha Go">
+      <span class="brand-badge" aria-hidden="true"></span>
+      <span>Gacha&nbsp;Go</span>
+    </div>
+    <ul>
+      <li><a href="#online">線上扭蛋</a></li>
+      <li><a href="#showcase">最新扭蛋</a></li>
+      <li><a href="#collection">收藏展示</a></li>
+      <li><a href="#reviews">評論區</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="section hero" id="home" aria-labelledby="home-title">
+    <div class="hero-inner">
+      <div>
+        <h1 id="home-title">Gacha Fun! <span class="ribbon">Spin · Collect · Share</span></h1>
+        <p>最新扭蛋、線上即抽、收藏你的快樂。滑到下方立刻開始！</p>
+        <div style="display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem;">
+          <a class="btn" href="#online">開始抽扭蛋</a>
+          <a class="btn" style="background:linear-gradient(180deg,#eef3ff,var(--blue));" href="#showcase">看最新系列</a>
+        </div>
+      </div>
+      <div class="gacha" aria-hidden="true">
+        <div class="machine">
+          <div class="machine-top">Gacha Go</div>
+          <div class="machine-window">結果將會在這裡顯示<br/>（此為視覺示意）</div>
+          <div class="machine-bottom"></div>
+          <div class="machine-slot"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 線上扭蛋 ============ -->
+  <section class="section" id="online" aria-labelledby="online-title">
+    <div class="container">
+      <h2 class="section-title">線上扭蛋</h2>
+      <p style="color:var(--sub); margin-top:-6px;">選擇系列 → 按下 <b>Spin</b> → 看結果 → 加入收藏</p>
+      <div class="hr-dots"></div>
+
+      <div class="grid" role="list">
+        <article class="card badge" role="listitem">
+          <h3>Retro Mix</h3>
+          <p>像素貼紙 / 復古徽章</p>
+          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+            <span class="tag">#經典</span><span class="tag">#8bit</span>
+          </div>
+          <a class="btn" href="#result">Spin</a>
+        </article>
+
+        <article class="card" role="listitem">
+          <h3>Kawaii World</h3>
+          <p>超可愛角色＆螢光糖果色</p>
+          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+            <span class="tag">#萌系</span><span class="tag">#糖果</span>
+          </div>
+          <a class="btn" href="#result">Spin</a>
+        </article>
+
+        <article class="card" role="listitem">
+          <h3>Mystery Box</h3>
+          <p>未知驚喜，稀有掉落</p>
+          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+            <span class="tag">#隨機</span><span class="tag">#SR</span>
+          </div>
+          <a class="btn" href="#result">Spin</a>
+        </article>
+
+        <article class="card" role="listitem">
+          <h3>Limited Edition</h3>
+          <p>限量款，錯過不再</p>
+          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+            <span class="tag">#限定</span><span class="tag">#收藏</span>
+          </div>
+          <a class="btn" href="#result">Spin</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 最新扭蛋展示 ============ -->
+  <section class="section" id="showcase" aria-labelledby="showcase-title">
+    <div class="container">
+      <h2 class="section-title">最新扭蛋展示</h2>
+      <p style="color:var(--sub); margin-top:-6px;"></p><!-- 以卡片呈現新品，滑鼠懸停可加入願望清單。 JS寫 -->
+      <div class="hr-dots"></div>
+
+      <div class="grid">
+        <article class="card"><h3>Neon Cassette</h3><p>90s 螢光卡帶系列</p></article>
+        <article class="card"><h3>Pixel Pets</h3><p>像素寵物陪你走</p></article>
+        <article class="card"><h3>Soda Pop</h3><p>汽水泡泡徽章</p></article>
+        <article class="card"><h3>Arcade Keys</h3><p>街機按鍵吊飾</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 收藏展示 ============ -->
+  <section class="section" id="collection" aria-labelledby="collection-title">
+    <div class="container">
+      <h2 class="section-title">我的收藏</h2>
+      <p style="color:var(--sub); margin-top:-6px;">已獲得（彩色）／未獲得（灰階上鎖）。</p>
+      <div class="hr-dots"></div>
+
+      <div class="collect">
+        <div class="tile">Retro 01</div>
+        <div class="tile">Retro 02</div>
+        <div class="tile lock">Retro 03</div>
+        <div class="tile">Kawaii 01</div>
+        <div class="tile lock">Kawaii 02</div>
+        <div class="tile">Mystery SR</div>
+        <div class="tile lock">Arcade 01</div>
+        <div class="tile">Soda 02</div>
+        <div class="tile lock">Pixel Pet X</div>
+        <div class="tile">Cassette G</div>
+        <div class="tile lock">Limited Z</div>
+        <div class="tile">Badge A</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 評論區 ============ -->
+  <section class="section" id="reviews" aria-labelledby="reviews-title">
+    <div class="container">
+      <h2 class="section-title">評論區</h2>
+      <p style="color:var(--sub); margin-top:-6px;">玩家分享抽到的驚喜與心得。</p>
+      <div class="hr-dots"></div>
+
+      <div class="reviews" role="list">
+        <article class="review" role="listitem" aria-label="評論 1">
+          <div style="display:flex; align-items:center; gap:.6rem;">
+            <img alt="" src="https://placehold.co/44x44/png" width="44" height="44" style="border-radius:50%;"/>
+            <div><strong>Nova</strong><div class="stars">★★★★★</div></div>
+          </div>
+          <p>動畫很可愛！抽到 SR 超開心～</p>
+        </article>
+
+        <article class="review" role="listitem" aria-label="評論 2">
+          <div style="display:flex; align-items:center; gap:.6rem;">
+            <img alt="" src="https://placehold.co/44x44/png" width="44" height="44" style="border-radius:50%;"/>
+            <div><strong>Amy</strong><div class="stars">★★★★☆</div></div>
+          </div>
+          <p>配色療癒，期待更多限定系列。</p>
+        </article>
+
+        <article class="review" role="listitem" aria-label="評論 3">
+          <div style="display:flex; align-items:center; gap:.6rem;">
+            <img alt="" src="https://placehold.co/44x44/png" width="44" height="44" style="border-radius:50%;"/>
+            <div><strong>Hui</strong><div class="stars">★★★★★</div></div>
+          </div>
+          <p>介面好懂，新手也能秒上手。</p>
+        </article>
+      </div>
+
+      <!-- 提交表單（僅樣式，尚未接後端/JS） -->
+      <form style="margin-top:18px; display:grid; gap:10px; max-width:720px;">
+        <label>你的暱稱
+          <input type="text" placeholder="輸入暱稱"
+                 style="width:100%; padding:.8rem 1rem; border-radius:12px; border:1px solid rgba(0,0,0,.15);" />
+        </label>
+        <label>你的評論
+          <textarea rows="4" placeholder="分享你抽到什麼吧！"
+                    style="width:100%; padding:.8rem 1rem; border-radius:12px; border:1px solid rgba(0,0,0,.15);"></textarea>
+        </label>
+        <div><button type="button" class="btn">送出評論</button></div>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="footer">
+  <div class="container cols">
+    <div>
+      <div class="brand" style="margin-bottom:.4rem;">
+        <span class="brand-badge"></span><span>Gacha&nbsp;Go</span>
+      </div>
+      <p style="color:var(--sub); margin:.2rem 0 1rem;">Spin Happiness, Collect Memories.</p>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
+        <a href="#">Instagram</a> · <a href="#">X/Twitter</a> · <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div>
+      <strong>導覽</strong><br/>
+      <a href="#online">線上扭蛋</a><br/>
+      <a href="#showcase">最新扭蛋</a><br/>
+      <a href="#collection">收藏展示</a><br/>
+      <a href="#reviews">評論區</a>
+    </div>
+    <div>
+      <strong>客服</strong><br/>
+      <a href="#">常見問題</a><br/>
+      <a href="#">隱私權政策</a><br/>
+      <a href="#">使用者條款</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

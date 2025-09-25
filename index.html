@@ -50,12 +50,275 @@ body{
   box-shadow: var(--shadow);
 }
 
+/* ========= 動畫關鍵影格 ========= */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-8px) rotate(1deg); }
+  66% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes fadeInUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(30px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+}
+
+@keyframes slideInLeft {
+  from { 
+    opacity: 0; 
+    transform: translateX(-50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes slideInRight {
+  from { 
+    opacity: 0; 
+    transform: translateX(50px); 
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0); 
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+@keyframes gachaFloat1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, -3px) rotate(5deg); }
+  50% { transform: translate(-2px, 4px) rotate(-3deg); }
+  75% { transform: translate(3px, -2px) rotate(2deg); }
+}
+
+@keyframes gachaFloat2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-4px, 3px) rotate(-4deg); }
+  66% { transform: translate(6px, -2px) rotate(6deg); }
+}
+
+@keyframes gachaFloat3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(2px, -4px) rotate(3deg); }
+  40% { transform: translate(-3px, 2px) rotate(-2deg); }
+  60% { transform: translate(4px, 3px) rotate(4deg); }
+  80% { transform: translate(-2px, -1px) rotate(-1deg); }
+}
+
+.gacha-ball {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gacha-ball:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.gacha-ball:nth-child(1) {
+  background: linear-gradient(135deg, var(--pink), #f8a5c2);
+  top: 20%;
+  left: 15%;
+  animation: gachaFloat1 4s ease-in-out infinite;
+}
+
+.gacha-ball:nth-child(2) {
+  background: linear-gradient(135deg, var(--lav), #9bb0e8);
+  top: 45%;
+  right: 20%;
+  animation: gachaFloat2 5s ease-in-out infinite 0.5s;
+}
+
+.gacha-ball:nth-child(3) {
+  background: linear-gradient(135deg, var(--mint), #8de0c4);
+  bottom: 25%;
+  left: 25%;
+  animation: gachaFloat3 3.5s ease-in-out infinite 1s;
+}
+
+.gacha-ball:nth-child(4) {
+  background: linear-gradient(135deg, var(--lemon), #fff3a0);
+  top: 35%;
+  left: 45%;
+  animation: gachaFloat1 4.5s ease-in-out infinite 1.5s;
+}
+
+.gacha-ball:nth-child(5) {
+  background: linear-gradient(135deg, var(--peach), #ffbfa8);
+  bottom: 40%;
+  right: 15%;
+  animation: gachaFloat2 3.8s ease-in-out infinite 0.8s;
+}
+
+@keyframes slideShow {
+  0% { transform: translateX(0); }
+  20% { transform: translateX(0); }
+  25% { transform: translateX(-25%); }
+  45% { transform: translateX(-25%); }
+  50% { transform: translateX(-50%); }
+  70% { transform: translateX(-50%); }
+  75% { transform: translateX(-75%); }
+  95% { transform: translateX(-75%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes cardSwipe {
+  0% { transform: translateX(100px) scale(0.8); opacity: 0; }
+  50% { transform: translateX(0) scale(0.95); opacity: 0.8; }
+  100% { transform: translateX(0) scale(1); opacity: 1; }
+}
+
+@keyframes wiggle {
+  0%, 7% { transform: rotateZ(0); }
+  15% { transform: rotateZ(-15deg); }
+  20% { transform: rotateZ(10deg); }
+  25% { transform: rotateZ(-10deg); }
+  30% { transform: rotateZ(6deg); }
+  35% { transform: rotateZ(-4deg); }
+  40%, 100% { transform: rotateZ(0); }
+}
+
+@keyframes gachaFloat1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(5px, -3px) rotate(5deg); }
+  50% { transform: translate(-2px, 4px) rotate(-3deg); }
+  75% { transform: translate(3px, -2px) rotate(2deg); }
+}
+
+@keyframes gachaFloat2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-4px, 3px) rotate(-4deg); }
+  66% { transform: translate(6px, -2px) rotate(6deg); }
+}
+
+@keyframes gachaFloat3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(2px, -4px) rotate(3deg); }
+  40% { transform: translate(-3px, 2px) rotate(-2deg); }
+  60% { transform: translate(4px, 3px) rotate(4deg); }
+  80% { transform: translate(-2px, -1px) rotate(-1deg); }
+}
+
+.gacha-ball {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  position: absolute;
+  border: 2px solid rgba(255,255,255,0.8);
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2), 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.gacha-ball:before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+.gacha-ball:nth-child(1) {
+  background: linear-gradient(135deg, var(--pink), #f8a5c2);
+  top: 20%;
+  left: 15%;
+  animation: gachaFloat1 4s ease-in-out infinite;
+}
+
+.gacha-ball:nth-child(2) {
+  background: linear-gradient(135deg, var(--lav), #9bb0e8);
+  top: 45%;
+  right: 20%;
+  animation: gachaFloat2 5s ease-in-out infinite 0.5s;
+}
+
+.gacha-ball:nth-child(3) {
+  background: linear-gradient(135deg, var(--mint), #8de0c4);
+  bottom: 25%;
+  left: 25%;
+  animation: gachaFloat3 3.5s ease-in-out infinite 1s;
+}
+
+.gacha-ball:nth-child(4) {
+  background: linear-gradient(135deg, var(--lemon), #fff3a0);
+  top: 35%;
+  left: 45%;
+  animation: gachaFloat1 4.5s ease-in-out infinite 1.5s;
+}
+
+.gacha-ball:nth-child(5) {
+  background: linear-gradient(135deg, var(--peach), #ffbfa8);
+  bottom: 40%;
+  right: 15%;
+  animation: gachaFloat2 3.8s ease-in-out infinite 0.8s;
+}
+
+.gacha-ball:nth-child(6) {
+  background: linear-gradient(135deg, var(--blue), #7a98e0);
+  top: 60%;
+  right: 35%;
+  animation: gachaFloat3 4.2s ease-in-out infinite 0.3s;
+}
+
+/* 進場動畫 */
+.animate-in {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.8s ease-out forwards;
+}
+
 /* ========= 導覽 ========= */
 .header{
   position:sticky; top:0; z-index:50;
   backdrop-filter: blur(8px);
   background: rgba(255,255,255,.75);
   border-bottom: 1px solid rgba(0,0,0,.06);
+  animation: fadeInUp 0.6s ease-out;
 }
 .nav{
   max-width:var(--container);
@@ -72,6 +335,7 @@ body{
   width:36px; height:36px; border-radius:10px;
   background: conic-gradient(from 180deg at 50% 50%, var(--pink), var(--lav), var(--mint), var(--lemon), var(--pink));
   box-shadow: inset 0 0 0 3px #fff, var(--shadow);
+  animation: spin 8s linear infinite;
 }
 .nav ul{margin-left:auto; display:flex; gap:.6rem; list-style:none; padding:0}
 .nav a{
@@ -79,8 +343,12 @@ body{
   padding:.55rem .8rem; border-radius:999px; text-decoration:none;
   color:#333; font-weight:600; font-size:.95rem;
   background:#fff; box-shadow:var(--shadow); border:1px solid rgba(0,0,0,.06);
+  transition: all 0.3s ease;
 }
-.nav a:hover{ transform: translateY(-1px); }
+.nav a:hover{ 
+  transform: translateY(-2px) scale(1.05); 
+  box-shadow: 0 6px 20px rgba(0,0,0,.15);
+}
 
 /* ========= Hero（格紋背景） ========= */
 .section{
@@ -100,17 +368,12 @@ body{
   width:260px; height:260px; border-radius:50%;
   background: radial-gradient(circle at 30% 30%, #fff, var(--pink) 60%);
   opacity:.7; filter: blur(2px);
+  animation: float 6s ease-in-out infinite;
 }
 .hero::after{
   inset:auto -80px -160px auto; width:320px; height:320px;
   background: radial-gradient(circle at 70% 30%, #fff, var(--lav) 60%);
-}
-@media (max-width: 640px) {
-  .hero::before,
-  .hero::after {
-    display: none;
-    content: none; /* 保險一點，避免殘留 */
-  }
+  animation: float 8s ease-in-out infinite reverse;
 }
 .hero-inner{
   max-width:var(--container); margin-inline:auto; padding:0 1rem;
@@ -120,8 +383,12 @@ h1{
   font-size: clamp(2rem, 4.8vw, 3.6rem);
   line-height:1.1; margin: 0 0 .6rem 0;
   letter-spacing:.5px;
+  animation: slideInLeft 1s ease-out;
 }
-.hero p{ color:var(--sub); margin: 0 0 1.2rem 0; }
+.hero p{ 
+  color:var(--sub); margin: 0 0 1.2rem 0; 
+  animation: slideInLeft 1s ease-out 0.2s both;
+}
 
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
@@ -130,14 +397,44 @@ h1{
   box-shadow: 0 4px 0 var(--accent-ink), var(--shadow);
   background: linear-gradient(180deg, #ffe2f1, var(--accent));
   color:#2a1732;
-  transition: transform .06s ease;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
 }
-.btn:hover{ transform: translateY(-2px); }
-.btn:active{ transform: translateY(1px); box-shadow: 0 2px 0 var(--accent-ink); }
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -200px;
+  width: 200px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.6s;
+}
+.btn:hover::before {
+  left: calc(100% + 200px);
+}
+.btn:hover{ 
+  transform: translateY(-3px) scale(1.02); 
+  box-shadow: 0 8px 0 var(--accent-ink), var(--shadow);
+}
+.btn:active{ 
+  transform: translateY(1px) scale(0.98); 
+  box-shadow: 0 2px 0 var(--accent-ink); 
+}
+
+/* Hero按鈕動畫 */
+.hero .btn:first-child {
+  animation: slideInLeft 1s ease-out 0.4s both;
+}
+.hero .btn:last-child {
+  animation: slideInLeft 1s ease-out 0.6s both;
+}
 
 /* ========= 扭蛋機（示意造型） ========= */
 .gacha{
   display:grid; place-items:center;
+  animation: slideInRight 1s ease-out 0.3s both;
 }
 .machine{
   width:min(340px, 80%); aspect-ratio: 1/1.2; margin:auto; position:relative;
@@ -145,16 +442,29 @@ h1{
   background: linear-gradient(180deg, #fff, var(--mint));
   box-shadow: var(--shadow), inset 0 -8px 20px rgba(0,0,0,.05);
   border: 3px solid #2f2a4a;
+  animation: float 4s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.machine:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
 }
 .machine-top{
   height:45%; border-radius:18px 18px 10px 10px; background:var(--lav);
   display:grid; place-items:center; color:#2b2550; font-weight:700;
+  animation: pulse 2s ease-in-out infinite;
 }
 .machine-window{
   position:absolute; left:10%; right:10%; top:30%; height:26%;
-  background:#ffffffc7; border:2px dashed #7c71c5; border-radius:12px;
-  display:grid; place-items:center; text-align:center; padding:.5rem;
+  background: rgba(255,255,255,0.85); border:2px dashed #7c71c5; border-radius:12px;
+  display:flex; align-items:center; justify-content:center; text-align:center; padding:.5rem;
   font-weight:600; color:#6a5fb2;
+  animation: shimmer 3s ease-in-out infinite;
+  background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  backdrop-filter: blur(1px);
 }
 .machine-bottom{
   position:absolute; left:8%; right:8%; bottom:16%;
@@ -163,7 +473,9 @@ h1{
 }
 .machine-slot{
   position:absolute; left:50%; transform:translateX(-50%); bottom:6%;
-  width:46%; height:12%; border-radius: 12px; background:#2b2b2b; box-shadow: inset 0 4px 10px rgba(0,0,0,.4);
+  width:46%; height:12%; border-radius: 12px; background:#2b2b2b; 
+  box-shadow: inset 0 4px 10px rgba(0,0,0,.4);
+  animation: bounce 3s ease-in-out infinite;
 }
 
 /* ========= 通用容器 & 標題 ========= */
@@ -171,6 +483,118 @@ h1{
 .section-title{
   font-size: clamp(1.4rem, 3.4vw, 2.2rem);
   margin: 0 0 1rem 0;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* ========= 卡片滑動效果 ========= */
+.slider-container {
+  position: relative;
+  overflow: hidden;
+  padding: 0 60px;
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  gap: 16px;
+}
+
+.slider-wrapper.auto-slide {
+  animation: slideShow 16s infinite ease-in-out;
+}
+
+.slider-card {
+  flex: 0 0 calc(25% - 12px);
+  background:#fff; border-radius: var(--radius);
+  border:1px solid rgba(0,0,0,.08);
+  box-shadow: none/* var(--shadow) */; padding:16px;
+  position:relative; overflow:hidden;
+  transition: all 0.3s ease;
+  animation: cardSwipe 0.8s ease-out both;
+}
+
+.slider-card:nth-child(1) { animation-delay: 0.1s; }
+.slider-card:nth-child(2) { animation-delay: 0.2s; }
+.slider-card:nth-child(3) { animation-delay: 0.3s; }
+.slider-card:nth-child(4) { animation-delay: 0.4s; }
+
+.slider-card:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 25px 50px rgba(0,0,0,.2);
+  z-index: 10;
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.9);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--accent);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  user-select: none;
+  z-index: 20;
+}
+
+.slider-nav:hover {
+  background: var(--accent);
+  color: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-nav.prev {
+  left: 10px;
+}
+
+.slider-nav.next {
+  right: 10px;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+.slider-dot:hover {
+  background: var(--accent);
+  transform: scale(1.2);
+}
+
+@media (max-width: 1024px) { 
+  .slider-card { flex: 0 0 calc(33.333% - 11px); }
+}
+@media (max-width: 720px) { 
+  .slider-card { flex: 0 0 calc(50% - 8px); }
+  .slider-container { padding: 0 50px; }
+}
+@media (max-width: 480px) { 
+  .slider-card { flex: 0 0 calc(100% - 0px); }
+  .slider-container { padding: 0 40px; }
 }
 
 /* ========= 卡片格 ========= */
@@ -186,12 +610,26 @@ h1{
   border:1px solid rgba(0,0,0,.08);
   box-shadow: var(--shadow); padding:16px;
   position:relative; overflow:hidden;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out both;
 }
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+  transform: translateY(-8px) rotateX(5deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,.15);
+}
+
 .card.badge::after{
   content:"NEW"; position:absolute; top:10px; right:-18px;
   transform:rotate(15deg);
   background: var(--lemon); color:#5b4a00; font-weight:800;
   padding:.3rem .8rem; border-radius:999px; border:2px solid #5b4a00;
+  animation: wiggle 2s ease-in-out infinite;
 }
 
 /* ========= 膠囊標籤 ========= */
@@ -199,12 +637,19 @@ h1{
   display:inline-flex; align-items:center; gap:.4rem;
   padding:.35rem .6rem; border-radius:999px; font-size:.85rem; font-weight:700;
   border:2px solid #2a213e; background:#fff; box-shadow: 0 2px 0 #2a213e;
+  transition: all 0.2s ease;
+}
+.tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #2a213e;
 }
 
 /* ========= 章節色帶 ========= */
 .ribbon{
   background: linear-gradient(90deg, var(--pink), var(--lav), var(--mint), var(--lemon));
   -webkit-background-clip: text; color: transparent;
+  animation: shimmer 4s ease-in-out infinite;
+  background-size: 400% 100%;
 }
 
 /* ========= 收藏（已得/未得） ========= */
@@ -220,8 +665,38 @@ h1{
   border:1px solid rgba(0,0,0,.08); box-shadow: var(--shadow);
   background:#fff;
   font-weight:700;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.6s ease-out both;
 }
-.tile.lock{ filter: grayscale(1) contrast(.8) opacity(.65); }
+
+.tile:nth-child(1) { animation-delay: 0.05s; }
+.tile:nth-child(2) { animation-delay: 0.1s; }
+.tile:nth-child(3) { animation-delay: 0.15s; }
+.tile:nth-child(4) { animation-delay: 0.2s; }
+.tile:nth-child(5) { animation-delay: 0.25s; }
+.tile:nth-child(6) { animation-delay: 0.3s; }
+.tile:nth-child(7) { animation-delay: 0.35s; }
+.tile:nth-child(8) { animation-delay: 0.4s; }
+.tile:nth-child(9) { animation-delay: 0.45s; }
+.tile:nth-child(10) { animation-delay: 0.5s; }
+.tile:nth-child(11) { animation-delay: 0.55s; }
+.tile:nth-child(12) { animation-delay: 0.6s; }
+
+.tile img{
+    width: 150px;
+    height: 140px;
+}
+.tile:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+.tile.lock{ 
+  filter: grayscale(1) contrast(.8) opacity(.65); 
+  animation: fadeInUp 0.6s ease-out both;
+}
+.tile.lock:hover {
+  transform: scale(1.05);
+  filter: grayscale(0.8) contrast(.9) opacity(.8);
+}
 
 /* ========= 評論 ========= */
 .reviews{
@@ -235,8 +710,23 @@ h1{
   background:#fff; border-radius: var(--radius);
   border:1px solid rgba(0,0,0,.08); box-shadow: var(--shadow);
   padding:16px; display:grid; gap:8px;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out both;
 }
-.stars{ color:#ffb703; letter-spacing:1px; }
+
+.review:nth-child(1) { animation-delay: 0.1s; }
+.review:nth-child(2) { animation-delay: 0.2s; }
+.review:nth-child(3) { animation-delay: 0.3s; }
+
+.review:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(0,0,0,.12);
+}
+.stars{ 
+  color:#ffb703; 
+  letter-spacing:1px; 
+  animation: pulse 2s ease-in-out infinite;
+}
 
 /* ========= Footer ========= */
 .footer{
@@ -245,9 +735,17 @@ h1{
               #f9f6ff;
   border-top:1px solid rgba(0,0,0,.08);
   padding:40px 0;
+  animation: fadeInUp 0.8s ease-out;
 }
 .footer .cols{ display:grid; gap:18px; grid-template-columns: 2fr 1fr 1fr; }
-.footer a{ color:#333; font-weight:600; text-decoration:none; }
+.footer a{ 
+  color:#333; font-weight:600; text-decoration:none; 
+  transition: all 0.2s ease;
+}
+.footer a:hover {
+  color: var(--accent);
+  transform: translateX(3px);
+}
 
 /* ========= 小裝飾（分隔） ========= */
 .hr-dots{
@@ -255,7 +753,147 @@ h1{
   width:100%; height:10px; background:
     radial-gradient(circle, var(--c) 2px, transparent 3px) 0 50%/20px 10px repeat-x;
   opacity:.6; margin: 24px 0;
+  animation: fadeInUp 0.6s ease-out;
 }
+
+/* ========= 表單動畫 ========= */
+form {
+  animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+input, textarea {
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.1);
+  outline: 2px solid var(--accent);
+  border-color: var(--accent);
+}
+
+/* ========= 響應式調整 ========= */
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .machine {
+    animation-duration: 6s;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ========= 載入狀態 ========= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* ======== App 下載按鈕 ======== */
+.store-buttons{
+  display:flex; gap:.6rem; flex-wrap:wrap; margin-top:12px;
+}
+.store-badge{
+  --bg:#000;
+  display:inline-flex; align-items:center; gap:.6rem;
+  padding:.65rem .9rem; border-radius:14px;
+  text-decoration:none; background:var(--bg); color:#fff;
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18);
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.store-badge:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+}
+.store-badge .icon{
+  width:22px; height:22px; flex:0 0 22px;
+}
+.store-badge small{
+  display:block; font-size:10px; line-height:1; opacity:.8; letter-spacing:.4px;
+}
+.store-badge span{
+  display:block; font-weight:700; font-size:14px; line-height:1.1;
+}
+.store-badge.gp{ --bg:#121212; } /* 可依喜好微調 */
+@media (max-width:540px){
+  .store-badge{ flex:1 1 calc(50% - .6rem); justify-content:center; }
+}
+
+/* 小字在 footer 最右邊 */
+.footer > small{
+  display:block;
+  text-align:right;
+  color:var(--sub);
+  opacity:.9;
+  padding:8px 16px 0 16px; /* 右邊留點內距 */
+  font-size:12px;
+}
+
+/* 手機時置中 */
+@media (max-width:540px){
+  .footer > small{
+    text-align:center;
+    padding:12px 0 0;
+  }
+}
+
+/* 改動中 */
+
+
+/* 讓 footer 在手機寬度改為單欄 */
+@media (max-width: 640px){
+  .footer .cols{
+    grid-template-columns: 1fr;  /* 3 欄 → 1 欄 */
+    gap: 24px;
+  }
+}
+
+/* 品牌行與下載按鈕在手機時改為上下排列，避免擠在同一行 */
+@media (max-width: 640px){
+  .footer .brand{
+    flex-wrap: wrap;           /* 允許換行 */
+    row-gap: 8px;
+  }
+  /* 如果 store-buttons 放在 brand 之內，讓它佔滿一行 */
+  .footer .brand .store-buttons{
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+/* 下載按鈕在手機時各佔 50% 寬，已經有規則，再補強最小寬度 */
+@media (max-width: 540px){
+  .store-badge{
+    flex: 1 1 calc(50% - .6rem);
+    min-width: 150px;          /* 避免過窄變形 */
+    justify-content: center;
+  }
+}
+
+/* 版權文字靠右或置中（依你要的效果擇一） */
+/* 靠右： */
+.footer > small{
+  display:block;
+  text-align:right;
+  padding:12px 16px 0;
+  color:var(--sub);
+  opacity:.9;
+  font-size:12px;
+}
+@media (max-width:540px){
+  .footer > small{ text-align:center; padding:12px 0 0; }
+}
+
+
+
 </style>
 </head>
 <body>
@@ -294,7 +932,17 @@ h1{
       <div class="gacha" aria-hidden="true">
         <div class="machine">
           <div class="machine-top">Gacha Go</div>
-          <div class="machine-window">結果將會在這裡顯示<br/>（此為視覺示意）</div>
+          <div class="machine-window">
+            <div class="gacha-ball"></div>
+            <div class="gacha-ball"></div>
+            <div class="gacha-ball"></div>
+            <div class="gacha-ball"></div>
+            <div class="gacha-ball"></div>
+            <div class="gacha-ball"></div>
+            <span style="position: relative; z-index: 10; font-size: 0.85rem; text-align: center; line-height: 1.3;">
+              結果將會在這裡顯示<br/>（此為視覺示意）
+            </span>
+          </div>
           <div class="machine-bottom"></div>
           <div class="machine-slot"></div>
         </div>
@@ -309,42 +957,73 @@ h1{
       <p style="color:var(--sub); margin-top:-6px;">選擇系列 → 按下 <b>Spin</b> → 看結果 → 加入收藏</p>
       <div class="hr-dots"></div>
 
-      <div class="grid" role="list">
-        <article class="card badge" role="listitem">
-          <h3>Retro Mix</h3>
-          <p>像素貼紙 / 復古徽章</p>
-          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
-            <span class="tag">#經典</span><span class="tag">#8bit</span>
-          </div>
-          <a class="btn" href="#result">Spin</a>
-        </article>
+      <div class="slider-container" role="list">
+        <div class="slider-nav prev" onclick="slideCards('online', -1)">‹</div>
+        <div class="slider-nav next" onclick="slideCards('online', 1)">›</div>
+        
+        <div class="slider-wrapper auto-slide" id="online-slider">
+          <article class="slider-card badge" role="listitem">
+            <h3>Retro Mix</h3>
+            <p>像素貼紙 / 復古徽章</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#經典</span><span class="tag">#8bit</span>
+            </div>
+            <a class="btn" href="#result">Spin</a>
+          </article>
 
-        <article class="card" role="listitem">
-          <h3>Kawaii World</h3>
-          <p>超可愛角色＆螢光糖果色</p>
-          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
-            <span class="tag">#萌系</span><span class="tag">#糖果</span>
-          </div>
-          <a class="btn" href="#result">Spin</a>
-        </article>
+          <article class="slider-card" role="listitem">
+            <h3>Kawaii World</h3>
+            <p>超可愛角色＆螢光糖果色</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#萌系</span><span class="tag">#糖果</span>
+            </div>
+            <a class="btn" href="#result">Spin</a>
+          </article>
 
-        <article class="card" role="listitem">
-          <h3>Mystery Box</h3>
-          <p>未知驚喜，稀有掉落</p>
-          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
-            <span class="tag">#隨機</span><span class="tag">#SR</span>
-          </div>
-          <a class="btn" href="#result">Spin</a>
-        </article>
+          <article class="slider-card" role="listitem">
+            <h3>Mystery Box</h3>
+            <p>未知驚喜，稀有掉落</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#隨機</span><span class="tag">#SR</span>
+            </div>
+            <a class="btn" href="#result">Spin</a>
+          </article>
 
-        <article class="card" role="listitem">
-          <h3>Limited Edition</h3>
-          <p>限量款，錯過不再</p>
-          <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
-            <span class="tag">#限定</span><span class="tag">#收藏</span>
-          </div>
-          <a class="btn" href="#result">Spin</a>
-        </article>
+          <article class="slider-card" role="listitem">
+            <h3>Limited Edition</h3>
+            <p>限量款，錯過不再</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#限定</span><span class="tag">#收藏</span>
+            </div>
+            <a class="btn" href="#result">Spin</a>
+          </article>
+
+          <!-- 重複卡片用於無縫循環 -->
+          <article class="slider-card" role="listitem">
+            <h3>Neo Classic</h3>
+            <p>經典重製版系列</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#重製</span><span class="tag">#懷舊</span>
+            </div>
+            <a class="btn" href="#result">Spin</a>
+          </article>
+
+          <article class="slider-card" role="listitem">
+            <h3>Galaxy Dreams</h3>
+            <p>星空夢幻主題</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#星空</span><span class="tag">#夢幻</span>
+            </div>
+            <a class="btn" href="#result">Spin</a>
+          </article>
+        </div>
+        
+        <div class="slider-dots">
+          <div class="slider-dot active"></div>
+          <div class="slider-dot"></div>
+          <div class="slider-dot"></div>
+          <div class="slider-dot"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -356,11 +1035,59 @@ h1{
       <p style="color:var(--sub); margin-top:-6px;"></p><!-- 以卡片呈現新品，滑鼠懸停可加入願望清單。 JS寫 -->
       <div class="hr-dots"></div>
 
-      <div class="grid">
-        <article class="card"><h3>Neon Cassette</h3><p>90s 螢光卡帶系列</p></article>
-        <article class="card"><h3>Pixel Pets</h3><p>像素寵物陪你走</p></article>
-        <article class="card"><h3>Soda Pop</h3><p>汽水泡泡徽章</p></article>
-        <article class="card"><h3>Arcade Keys</h3><p>街機按鍵吊飾</p></article>
+      <div class="slider-container" role="list">
+        <div class="slider-nav prev" onclick="slideCards('showcase', -1)">‹</div>
+        <div class="slider-nav next" onclick="slideCards('showcase', 1)">›</div>
+        
+        <div class="slider-wrapper" id="showcase-slider">
+          <article class="slider-card">
+            <h3>Neon Cassette</h3>
+            <p>90s 復古風系列</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#復古</span><span class="tag">#螢光</span>
+            </div>
+          </article>
+          
+          <article class="slider-card">
+            <h3>relax</h3>
+            <p>紓壓玩具</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#壓力</span><span class="tag">#紓壓</span>
+            </div>
+          </article>
+          
+          <article class="slider-card">
+            <h3>Soda Pop</h3>
+            <p>汽水泡泡徽章</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#汽水</span><span class="tag">#泡泡</span>
+            </div>
+          </article>
+          
+          <article class="slider-card">
+            <h3>Arcade Keys</h3>
+            <p>街機按鍵吊飾</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#街機</span><span class="tag">#按鍵</span>
+            </div>
+          </article>
+
+          <article class="slider-card">
+            <h3>Fun</h3>
+            <p>惡搞趣味系列</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#惡搞</span><span class="tag">#趣味</span>
+            </div>
+          </article>
+
+          <article class="slider-card">
+            <h3>Space Journey</h3>
+            <p>太空旅行主題</p>
+            <div style="display:flex; gap:.4rem; flex-wrap:wrap; margin:.5rem 0 1rem;">
+              <span class="tag">#太空</span><span class="tag">#旅行</span>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
   </section>
@@ -373,18 +1100,18 @@ h1{
       <div class="hr-dots"></div>
 
       <div class="collect">
-        <div class="tile">Retro 01</div>
-        <div class="tile">Retro 02</div>
-        <div class="tile lock">Retro 03</div>
-        <div class="tile">Kawaii 01</div>
-        <div class="tile lock">Kawaii 02</div>
-        <div class="tile">Mystery SR</div>
-        <div class="tile lock">Arcade 01</div>
-        <div class="tile">Soda 02</div>
-        <div class="tile lock">Pixel Pet X</div>
-        <div class="tile">Cassette G</div>
-        <div class="tile lock">Limited Z</div>
-        <div class="tile">Badge A</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Retro 01</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Retro 02</div>
+        <div class="tile lock"><img src="./images/gachaman_with_money.png" alt="">Retro 03</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Kawaii 01</div>
+        <div class="tile lock"><img src="./images/gachaman_with_money.png" alt="">Kawaii 02</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Mystery SR</div>
+        <div class="tile lock"><img src="./images/gachaman_with_money.png" alt="">Arcade 01</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Soda 02</div>
+        <div class="tile lock"><img src="./images/gachaman_with_money.png" alt="">Pixel Pet X</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Cassette G</div>
+        <div class="tile lock"><img src="./images/gachaman_with_money.png" alt="">Limited Z</div>
+        <div class="tile"><img src="./images/gachaman_with_money.png" alt="">Badge A</div>
       </div>
     </div>
   </section>
@@ -399,24 +1126,24 @@ h1{
       <div class="reviews" role="list">
         <article class="review" role="listitem" aria-label="評論 1">
           <div style="display:flex; align-items:center; gap:.6rem;">
-            <img alt="" src="https://placehold.co/44x44/png" width="44" height="44" style="border-radius:50%;"/>
-            <div><strong>Nova</strong><div class="stars">★★★★★</div></div>
+            <img alt="" src="./images/gachaman.png" width="44" height="44" style="border-radius:50%;"/>
+            <div><strong>SuperNova</strong><div class="stars">★★★★★</div></div>
           </div>
           <p>動畫很可愛！抽到 SR 超開心～</p>
         </article>
 
         <article class="review" role="listitem" aria-label="評論 2">
           <div style="display:flex; align-items:center; gap:.6rem;">
-            <img alt="" src="https://placehold.co/44x44/png" width="44" height="44" style="border-radius:50%;"/>
-            <div><strong>Amy</strong><div class="stars">★★★★☆</div></div>
+            <img alt="" src="./images/gachaman.png" width="44" height="44" style="border-radius:50%;"/>
+            <div><strong>Alex</strong><div class="stars">★★★★☆</div></div>
           </div>
           <p>配色療癒，期待更多限定系列。</p>
         </article>
 
         <article class="review" role="listitem" aria-label="評論 3">
-          <div style="display:flex; align-items:center; gap:.6rem;">
-            <img alt="" src="https://placehold.co/44x44/png" width="44" height="44" style="border-radius:50%;"/>
-            <div><strong>Hui</strong><div class="stars">★★★★★</div></div>
+          <div style="display:flex; gap:.6rem;">
+            <img alt="" src="./images/gachaman.png" width="44" height="44" style="border-radius:50%;"/>
+            <div><strong>Rui</strong><div class="stars">★★★★★</div></div>
           </div>
           <p>介面好懂，新手也能秒上手。</p>
         </article>
@@ -445,6 +1172,40 @@ h1{
     <div>
       <div class="brand" style="margin-bottom:.4rem;">
         <span class="brand-badge"></span><span>Gacha&nbsp;Go</span>
+        <div class="store-buttons" aria-label="下載 App">
+  <!-- App Store -->
+  <a class="store-badge" 
+     href="#" 
+     aria-label="在 App Store 下載（暫無連結可先用 # ）" 
+     rel="noopener">
+    <!-- Apple logo (SVG) -->
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor"
+        d="M16.365 12.43c-.03-3.04 2.49-4.49 2.6-4.56-1.42-2.07-3.63-2.36-4.41-2.39-1.87-.19-3.64 1.1-4.58 1.1-.96 0-2.41-1.07-3.97-1.04-2.04.03-3.93 1.19-4.98 3.01-2.12 3.66-.54 9.06 1.52 12.04 1 1.44 2.18 3.05 3.75 3 1.52-.06 2.09-.97 3.93-.97 1.83 0 2.34.97 3.96.93 1.64-.03 2.68-1.47 3.68-2.91 1.15-1.67 1.62-3.29 1.64-3.37-.04-.02-3.15-1.2-3.14-4.84zM13.74 3.65c.83-1 1.39-2.39 1.24-3.78-1.2.05-2.63.8-3.48 1.8-.76.88-1.42 2.3-1.25 3.65 1.33.1 2.66-.67 3.5-1.67z"/>
+    </svg>
+    <div>
+      <small>Download on the</small>
+      <span>App Store</span>
+    </div>
+  </a>
+
+  <!-- Google Play -->
+  <a class="store-badge gp" 
+     href="#" 
+     aria-label="在 Google Play 下載（暫無連結可先用 # ）" 
+     rel="noopener">
+    <!-- Google Play triangle (SVG) -->
+    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+      <path fill="currentColor"
+        d="M3.6 2.9c-.25.22-.4.55-.4.9v16.4c0 .35.15.68.4.9l9.1-9.1-9.1-9.1zm10.3 8.2 3.2-3.2-8.5-4.9 5.3 8.1zm0 1.8-3.2 3.2 5.3 8.1 8.5-4.9-10.6-6.4z"/>
+    </svg>
+    <div>
+      <small>GET IT ON</small>
+      <span>Google Play</span>
+    </div>
+  </a>
+</div>
+
       </div>
       <p style="color:var(--sub); margin:.2rem 0 1rem;">Spin Happiness, Collect Memories.</p>
       <div style="display:flex; gap:.5rem; flex-wrap:wrap;">
@@ -465,7 +1226,164 @@ h1{
       <a href="#">使用者條款</a>
     </div>
   </div>
+  <small> Copyright&copy;2025-Gacha GO </small>
 </footer>
 
 </body>
+
+<script>
+// 卡片滑動控制
+let currentSlides = {
+  online: 0,
+  showcase: 0
+};
+
+function slideCards(section, direction) {
+  const slider = document.getElementById(section + '-slider');
+  const cards = slider.children;
+  const totalCards = cards.length;
+  const visibleCards = getVisibleCards();
+  const maxSlide = Math.max(0, totalCards - visibleCards);
+  
+  // 暫停自動播放
+  if (section === 'online') {
+    slider.classList.remove('auto-slide');
+  }
+  
+  currentSlides[section] += direction;
+  
+  if (currentSlides[section] < 0) {
+    currentSlides[section] = maxSlide;
+  } else if (currentSlides[section] > maxSlide) {
+    currentSlides[section] = 0;
+  }
+  
+  const translateX = -(currentSlides[section] * (100 / visibleCards));
+  slider.style.transform = `translateX(${translateX}%)`;
+  
+  // 更新指示點（僅限 online 區域）
+  if (section === 'online') {
+    updateDots(section);
+  }
+}
+
+function getVisibleCards() {
+  if (window.innerWidth <= 480) return 1;
+  if (window.innerWidth <= 720) return 2;
+  if (window.innerWidth <= 1024) return 3;
+  return 4;
+}
+
+function updateDots(section) {
+  if (section !== 'online') return;
+  
+  const dots = document.querySelectorAll('.slider-dot');
+  const totalDots = dots.length;
+  const currentDot = Math.floor(currentSlides[section] / 1) % totalDots;
+  
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index === currentDot);
+  });
+}
+
+// 點擊指示點跳轉
+document.addEventListener('DOMContentLoaded', function() {
+  const dots = document.querySelectorAll('.slider-dot');
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      const slider = document.getElementById('online-slider');
+      slider.classList.remove('auto-slide');
+      currentSlides.online = index;
+      const visibleCards = getVisibleCards();
+      const translateX = -(currentSlides.online * (100 / visibleCards));
+      slider.style.transform = `translateX(${translateX}%)`;
+      updateDots('online');
+    });
+  });
+  
+  // 響應式處理
+  window.addEventListener('resize', () => {
+    // 重置滑動位置
+    Object.keys(currentSlides).forEach(section => {
+      currentSlides[section] = 0;
+      const slider = document.getElementById(section + '-slider');
+      slider.style.transform = 'translateX(0%)';
+    });
+    updateDots('online');
+  });
+});
+
+// 觸控滑動支援
+let startX = 0;
+let currentX = 0;
+let isDragging = false;
+
+document.querySelectorAll('.slider-wrapper').forEach(slider => {
+  const section = slider.id.replace('-slider', '');
+  
+  slider.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+    slider.style.transition = 'none';
+  });
+  
+  slider.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentX = e.touches[0].clientX;
+    const diffX = startX - currentX;
+    
+    if (Math.abs(diffX) > 10) {
+      e.preventDefault();
+    }
+  });
+  
+  slider.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    slider.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    
+    const diffX = startX - currentX;
+    if (Math.abs(diffX) > 50) {
+      slideCards(section, diffX > 0 ? 1 : -1);
+    }
+  });
+  
+  // 鼠標拖拽支援
+  slider.addEventListener('mousedown', (e) => {
+    startX = e.clientX;
+    isDragging = true;
+    slider.style.transition = 'none';
+    slider.style.cursor = 'grabbing';
+    e.preventDefault();
+  });
+  
+  slider.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    currentX = e.clientX;
+  });
+  
+  slider.addEventListener('mouseup', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    
+    slider.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    slider.style.cursor = 'grab';
+    
+    const diffX = startX - currentX;
+    if (Math.abs(diffX) > 30) {
+      slideCards(section, diffX > 0 ? 1 : -1);
+    }
+  });
+  
+  slider.addEventListener('mouseleave', () => {
+    if (isDragging) {
+      isDragging = false;
+      slider.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      slider.style.cursor = 'grab';
+    }
+  });
+});
+</script>
+
 </html>
